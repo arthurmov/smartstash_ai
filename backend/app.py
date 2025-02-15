@@ -4,7 +4,7 @@ import requests
 import openai
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS
+CORS(app)
 
 # Fetch crypto price from CoinGecko API
 def get_crypto_price(crypto_id):
