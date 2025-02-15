@@ -26,7 +26,7 @@ The **AI-Powered Financial Goal-Based Web Scraper** is a smart tool that helps u
 3. **AI Filters & Summarizes** – Uses OpenAI to process and present relevant financial data.
 4. **Results Displayed on Dashboard** – Users can view, track, and act on financial opportunities.
 
-👥 Team
+## 👥 Team
 
 Islam Elsayed
 
