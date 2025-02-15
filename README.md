@@ -1,33 +1,44 @@
-# AI-Powered Financial Goal-Based Web Scraper
+# 🚀 AI-Powered Crypto & Investment Tracker  
 
-## 🚀 Project Overview
-The **AI-Powered Financial Goal-Based Web Scraper** is a smart tool that helps users achieve their financial goals by scraping and analyzing real-time financial data. Whether it's investing, budgeting, or finding the best deals, this project uses **AI and web scraping** to deliver **personalized financial insights**.
+## 📌 Project Overview  
+The **AI-Powered Crypto & Investment Tracker** is a smart tool that helps users **track cryptocurrency prices, analyze investment opportunities, and get AI-driven insights** based on real-time financial data. This project integrates **web scraping, AI processing, and financial analytics** to deliver actionable insights for investors.  
 
-## 🎯 Key Features
-- **Goal-Based Insights** – Users enter their financial goals, and AI finds relevant opportunities.
-- **AI-Powered Analysis** – Uses OpenAI to summarize and filter scraped financial data.
-- **Real-Time Web Scraping** – Collects stock market trends, investment opportunities, or budget-friendly deals.
-- **User-Friendly Dashboard** – Displays financial insights in an interactive UI.
-- **Automated Notifications** – Alerts users when new opportunities arise.
+---
 
-## 🛠️ Tech Stack
-| Component       | Technology |
-|----------------|------------|
-| **Frontend**   | React |
-| **Backend**    | Flask |
-| **Web Scraping** | |
-| **AI Processing** | |
-| **Database**  |
-| **Hosting**    |  |
+## 🎯 Key Features  
+✔ **Crypto Price Tracking** – Fetches live cryptocurrency prices from **CoinGecko API**.  
+✔ **AI-Powered Investment Insights** – Uses **OpenAI GPT-4** to analyze trends and suggest buy/sell actions.  
+✔ **Real-Time Web Scraping** – Collects financial news & trends to keep investors informed.  
+✔ **User-Friendly Dashboard** – Displays crypto trends in an **interactive React UI** with charts & alerts.  
+✔ **Automated Alerts** – Notifies users when major price changes occur.  
 
-## 🏗️ How It Works
-1. **User Inputs Financial Goals** – (Investing, Saving, Finding Deals, etc.)
-2. **Scraper Fetches Data** – Collects real-time financial news, investment insights, and money-saving opportunities.
-3. **AI Filters & Summarizes** – Uses OpenAI to process and present relevant financial data.
-4. **Results Displayed on Dashboard** – Users can view, track, and act on financial opportunities.
+---
 
-## 👥 Team
+## 🛠️ Tech Stack  
+| **Component**        | **Technology**      |  
+|----------------------|--------------------|  
+| **Frontend**        | React (with Chart.js) |  
+| **Backend**         | Flask (Python)      |  
+| **Web Scraping**    | Requests + BeautifulSoup (for news/trends) |  
+| **AI Processing**   | OpenAI GPT-4 API    |  
+| **Database**        | SQLite (for user preferences) |  
+| **Hosting**         | Flask (Backend) + Vercel (Frontend) |  
 
-- Islam Elsayed
+---
 
-- Arthur Movsesyan
+## 🏗️ How It Works  
+1️⃣ **User Selects a Crypto or Investment Goal** – (e.g., Bitcoin, Ethereum, or Stocks).  
+2️⃣ **Real-Time Data Fetching** – The system pulls live crypto prices from **CoinGecko API**.  
+3️⃣ **AI-Generated Investment Insights** – OpenAI analyzes market trends & recommends buy/sell strategies.  
+4️⃣ **Dashboard Visualization** – Interactive **charts & tables** display financial insights.  
+5️⃣ **Automated Notifications** – Alerts users when prices hit certain thresholds.  
+
+---
+
+## 📸 Screenshots (Coming Soon)  
+
+---
+
+## 👥 Team  
+- **Arthur Movsesyan**  
+- **Islam Elsayed**  
