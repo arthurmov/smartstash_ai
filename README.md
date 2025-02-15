@@ -28,6 +28,6 @@ The **AI-Powered Financial Goal-Based Web Scraper** is a smart tool that helps u
 
 ## 👥 Team
 
-Islam Elsayed
+- Islam Elsayed
 
-Arthur Movsesyan
+- Arthur Movsesyan
