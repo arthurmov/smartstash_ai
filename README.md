@@ -13,8 +13,8 @@ The **AI-Powered Financial Goal-Based Web Scraper** is a smart tool that helps u
 ## 🛠️ Tech Stack
 | Component       | Technology |
 |----------------|------------|
-| **Frontend**   |  |
-| **Backend**    |  |
+| **Frontend**   | React |
+| **Backend**    | Flask |
 | **Web Scraping** | |
 | **AI Processing** | |
 | **Database**  |
