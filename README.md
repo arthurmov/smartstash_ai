@@ -35,7 +35,7 @@ The **AI-Powered Crypto & Investment Tracker** is a smart tool that helps users 
 2️⃣ **Real-Time Data Fetching** – The system pulls live crypto prices from **CoinGecko API**.  
 3️⃣ **AI-Generated Investment Insights** – OpenAI analyzes market trends & informs the user about long term holding vs. short term trading of said coin.  
 4️⃣ **Dashboard Visualization** – Interactive **charts & tables** display recent trends.  
-5️⃣ **AI-Powered Crypto Chatbot** – Ask questions to gain insights and guidance on cryptocurrency investments, market trends, and blockchain technology..  
+5️⃣ **AI-Powered Crypto Chatbot** – Ask questions to gain insights and guidance on cryptocurrency investments, market trends, and blockchain technology.  
 
 ---
 
