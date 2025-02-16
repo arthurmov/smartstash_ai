@@ -19,10 +19,8 @@ The **AI-Powered Crypto & Investment Tracker** is a smart tool that helps users 
 |----------------------|--------------------|  
 | **Frontend**        | React (with Chart.js) |  
 | **Backend**         | Flask (Python)      |  
-| **Web Scraping**    | Requests + BeautifulSoup (for news/trends) |  
+| **Crypto Processing**    | CoinGecko API |  
 | **AI Processing**   | OpenAI GPT-4 API    |  
-| **Database**        | SQLite (for user preferences) |  
-| **Hosting**         | Flask (Backend) + Vercel (Frontend) |  
 
 ---
 
