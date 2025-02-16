@@ -33,7 +33,13 @@ The **AI-Powered Crypto & Investment Tracker** is a smart tool that helps users 
 
 ---
 
-## 📸 Screenshots (Coming Soon)  
+## 📸 Screenshots
+
+### 🏠 Dashboard Page  
+![SmartStashAI Dashboard](assets/images/smartstash-dashboard.png)
+
+### ℹ️ About Page  
+![SmartStashAI About](assets/images/smartstash-about.png) 
 
 ---
 
