@@ -7,18 +7,17 @@ import os
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # Allow frontend access
 
-# Load OpenAI API Key securely from environment variable
+# Load OpenAI API Key securely from environment variable (optional)
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+openai_client = None
 
-if not OPENAI_API_KEY:
-    print("❌ ERROR: OpenAI API Key is missing.")
-    raise ValueError("❌ ERROR: OpenAI API Key is missing. Set OPENAI_API_KEY as an environment variable.")
+if OPENAI_API_KEY:
+    print(f"✅ OpenAI API Key Loaded: {OPENAI_API_KEY[:5]}********")
+    openai_client = openai.OpenAI(api_key=OPENAI_API_KEY)
+else:
+    print("⚠️ OpenAI API Key not found. AI features will be disabled.")
 
-print(f"✅ OpenAI API Key Loaded: {OPENAI_API_KEY[:5]}********")  # Debugging step
-
-openai_client = openai.OpenAI(api_key=OPENAI_API_KEY)  # Correct OpenAI initialization
-
-# Fetch cryptocurrency price from CoinGecko API
+# Fetch cryptocurrency data from CoinGecko API
 def get_crypto_price(crypto_id):
     url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto_id}&vs_currencies=usd"
     try:
@@ -33,15 +32,6 @@ def get_crypto_price(crypto_id):
         else:
             print(f"❌ ERROR: No price data found for {crypto_id}")
             return None
-    except requests.exceptions.HTTPError as http_err:
-        print(f"❌ HTTP Error: {http_err}")
-        return None
-    except requests.exceptions.ConnectionError:
-        print("❌ ERROR: Unable to connect to CoinGecko API.")
-        return None
-    except requests.exceptions.Timeout:
-        print("❌ ERROR: CoinGecko API request timed out.")
-        return None
     except requests.exceptions.RequestException as e:
         print(f"❌ ERROR: API Request Failed: {e}")
         return None
@@ -77,6 +67,10 @@ def crypto_insight():
 
     print(f"✅ SUCCESS: Price retrieved for {crypto}: ${price}")
 
+    # Ensure OpenAI API is available before making a request
+    if not openai_client:
+        return jsonify({"crypto": crypto, "price": price, "insight": "AI insights unavailable."}), 500
+
     # Updated AI prompt to be more general and avoid financial advice warnings
     prompt = f"Provide an easy-to-read comparison of long-term holding vs. short-term trading for {crypto}."
 
@@ -107,17 +101,59 @@ def test_api():
     if bitcoin_price is None:
         return jsonify({"error": "CoinGecko API is not working!"}), 500
 
-    test_prompt = "Describe how blockchain technology supports {crypto} and its security features."
-    try:
-        response = openai_client.chat.completions.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": test_prompt}]
-        )
-        ai_response = response.choices[0].message.content
-    except Exception as e:
-        return jsonify({"crypto_price": bitcoin_price, "AI_insight": "AI not responding", "error": str(e)}), 500
+    ai_response = "AI features are currently disabled."
+    if openai_client:
+        test_prompt = "Describe how blockchain technology supports Bitcoin and its security features."
+        try:
+            response = openai_client.chat.completions.create(
+                model="gpt-4",
+                messages=[{"role": "user", "content": test_prompt}]
+            )
+            ai_response = response.choices[0].message.content
+        except Exception as e:
+            ai_response = "AI not responding"
 
     return jsonify({"crypto_price": bitcoin_price, "AI_insight": ai_response})
+
+# Fetch cryptocurrency historical data
+def get_crypto_history(crypto_id, days=7):
+    url = f"https://api.coingecko.com/api/v3/coins/{crypto_id}/market_chart"
+    params = {
+        "vs_currency": "usd",
+        "days": days,
+        "interval": "daily"
+    }
+    try:
+        response = requests.get(url, params=params, timeout=5)
+        response.raise_for_status()
+        data = response.json()
+        
+        if "prices" in data:
+            # Extract just the prices from the timestamp, price pairs
+            prices = [price[1] for price in data["prices"]]
+            timestamps = [price[0] for price in data["prices"]]
+            return {"prices": prices, "timestamps": timestamps}
+        else:
+            print(f"❌ ERROR: No historical data found for {crypto_id}")
+            return None
+    except requests.exceptions.RequestException as e:
+        print(f"❌ ERROR: Failed to fetch historical data: {e}")
+        return None
+
+@app.route("/crypto-history", methods=["GET"])
+def crypto_history():
+    crypto_id = request.args.get("crypto", "").lower().strip()
+    days = request.args.get("days", 7, type=int)
+    
+    if not crypto_id:
+        return jsonify({"error": "Missing cryptocurrency ID"}), 400
+        
+    history_data = get_crypto_history(crypto_id, days)
+    
+    if history_data is None:
+        return jsonify({"error": f"Could not retrieve historical data for {crypto_id}"}), 400
+        
+    return jsonify(history_data)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

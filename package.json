@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "chartjs-adapter-date-fns": "^3.0.0"
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "openai": "^4.85.1"
   }
 }

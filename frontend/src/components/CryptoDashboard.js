@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-import { Card, CardContent } from "./ui/card";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import '../styles/CryptoDashboard.css';
 
 Chart.register(...registerables);
 
@@ -12,76 +10,118 @@ export default function CryptoDashboard() {
   const [price, setPrice] = useState(null);
   const [insight, setInsight] = useState("Fetching AI insights...");
   const [history, setHistory] = useState([]);
-  const [error, setError] = useState(null);
+  const [timestamps, setTimestamps] = useState([]);
 
   useEffect(() => {
     fetchCryptoData();
-  }, []);
+  }, [crypto]);
 
   const fetchCryptoData = async () => {
     try {
-      setError(null); // Reset error before fetching
-      const priceRes = await fetch(`http://127.0.0.1:5000/crypto?crypto=${crypto}`);
-      const priceData = await priceRes.json();
-
+      setPrice("Loading...");
+      setInsight("Fetching insights...");
+      
+      // Fetch current price
+      const priceResponse = await fetch(`http://localhost:5000/crypto?crypto=${crypto}`);
+      const priceData = await priceResponse.json();
+      
       if (priceData.error) {
-        setError(priceData.error);
-        setPrice("N/A");
-        setInsight("AI insights unavailable.");
-        return;
+        throw new Error(priceData.error);
       }
-
+      
       setPrice(priceData.price);
-      setHistory((prev) => [...prev.slice(-6), priceData.price]);
 
-      const insightRes = await fetch(`http://127.0.0.1:5000/crypto-insight?crypto=${crypto}`);
-      const insightData = await insightRes.json();
+      // Fetch historical data
+      const historyResponse = await fetch(`http://localhost:5000/crypto-history?crypto=${crypto}&days=7`);
+      const historyData = await historyResponse.json();
+      
+      if (historyData.error) {
+        throw new Error(historyData.error);
+      }
+      
+      setHistory(historyData.prices);
+      setTimestamps(historyData.timestamps);
 
+      // Fetch AI insight
+      const insightResponse = await fetch(`http://localhost:5000/crypto-insight?crypto=${crypto}`);
+      const insightData = await insightResponse.json();
+      
       if (insightData.error) {
-        setInsight("AI insights unavailable.");
+        setInsight("AI insights unavailable at the moment.");
       } else {
         setInsight(insightData.insight);
       }
-    } catch (err) {
-      console.error("Error fetching data:", err);
-      setError("Failed to fetch data. Please check the backend connection.");
-      setPrice("N/A");
-      setInsight("AI insights unavailable.");
+    } catch (error) {
+      setPrice("Error fetching price");
+      setInsight("Unable to fetch market insights at the moment.");
+      console.error("Error fetching data:", error);
     }
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto space-y-4">
-      <Input
-        value={crypto}
-        onChange={(e) => setCrypto(e.target.value.toLowerCase())}
-        placeholder="Enter crypto name (e.g., bitcoin, ethereum)"
-      />
-      <Button onClick={fetchCryptoData}>Fetch Data</Button>
+    <div className="crypto-dashboard">
+      <div className="input-section">
+        <input
+          type="text"
+          value={crypto}
+          onChange={(e) => setCrypto(e.target.value.toLowerCase())}
+          placeholder="Enter crypto name (e.g., bitcoin, ethereum)"
+          className="crypto-input"
+        />
+        <button onClick={fetchCryptoData} className="fetch-button">
+          Fetch Data
+        </button>
+      </div>
 
-      {error && <p className="text-red-500 text-center">{error}</p>}
+      <div className="crypto-card">
+        <h2>{crypto.toUpperCase()}</h2>
+        <p className="price">Price: ${price || "Loading..."}</p>
+        <p className="insight">{insight}</p>
+      </div>
 
-      <Card>
-        <CardContent className="p-4 text-center">
-          <h2 className="text-xl font-bold">{crypto.toUpperCase()}</h2>
-          <p className="text-lg">Price: ${price || "Loading..."}</p>
-          <p className="text-sm text-gray-600">{insight}</p>
-        </CardContent>
-      </Card>
-
-      <Line
-        data={{
-          labels: Array.from({ length: history.length }, (_, i) => `T-${i}`),
-          datasets: [
-            {
-              label: "Price Trend",
-              data: history,
-              borderColor: "#4CAF50",
-              fill: false,
+      <div className="chart-container">
+        <Line
+          data={{
+            labels: timestamps.map(ts => new Date(ts).toLocaleDateString()),
+            datasets: [
+              {
+                label: "",
+                data: history,
+                borderColor: "var(--primary)",
+                backgroundColor: "var(--primary)",
+                fill: false,
+                tension: 0.4
+              },
+            ],
+          }}
+          options={{
+            responsive: true,
+            plugins: {
+              legend: {
+                display: false
+              }
             },
-          ],
-        }}
-      />
+            scales: {
+              y: {
+                ticks: {
+                  color: 'var(--accent)'
+                },
+                grid: {
+                  color: 'rgba(255, 255, 255, 0.1)'
+                }
+              },
+              x: {
+                ticks: {
+                  color: 'var(--accent)'
+                },
+                grid: {
+                  color: 'rgba(255, 255, 255, 0.1)'
+                }
+              }
+            }
+          }}
+        />
+      </div>
     </div>
   );
 }

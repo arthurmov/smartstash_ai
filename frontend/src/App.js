@@ -1,13 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from "./components/Navbar";
-import AboutUs from "./components/AboutUs";
-import CryptoSection from "./components/CryptoSection";
-import CryptoDashboard from "./components/CryptoDashboard";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import AboutUs from './components/AboutUs';
+import CryptoSection from './components/CryptoSection';
+import CryptoDashboard from './components/CryptoDashboard';
+import CryptoStash from './components/CryptoStash';
 import './styles/variables.css';
-import "./styles/App.css";
-
-
+import './styles/App.css';
 
 function Home() {
   return (
@@ -39,9 +38,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/crypto" element={<CryptoSection />} />
           <Route path="/about" element={<AboutUs />} />
-        </Routes>
-      </div>
-    </Router>
+      </Routes>
+      <CryptoStash />
+    </div>
+  </Router>
   );
 }
 
