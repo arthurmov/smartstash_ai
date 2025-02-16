@@ -1,0 +1,63 @@
+.about-container {
+    padding: 2rem 0;
+  }
+  
+  .about-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .about-header h1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .about-section {
+    background: var(--background-secondary);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .about-section h2 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+  
+  .modern-disclaimer {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    margin: 2rem 0;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .modern-disclaimer:hover {
+    transform: translateY(-2px);
+  }
+  
+  .modern-disclaimer h2 {
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .contact-section {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .mission-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--accent);
+  }
+  

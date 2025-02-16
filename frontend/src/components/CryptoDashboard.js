@@ -12,20 +12,42 @@ export default function CryptoDashboard() {
   const [price, setPrice] = useState(null);
   const [insight, setInsight] = useState("Fetching AI insights...");
   const [history, setHistory] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchCryptoData();
-  }, [crypto]);
+  }, []);
 
   const fetchCryptoData = async () => {
-    const priceRes = await fetch(`http://127.0.0.1:5000/crypto?crypto=${crypto}`);
-    const priceData = await priceRes.json();
-    setPrice(priceData.price);
-    setHistory((prev) => [...prev.slice(-6), priceData.price]);
+    try {
+      setError(null); // Reset error before fetching
+      const priceRes = await fetch(`http://127.0.0.1:5000/crypto?crypto=${crypto}`);
+      const priceData = await priceRes.json();
 
-    const insightRes = await fetch(`http://127.0.0.1:5000/crypto-insight?crypto=${crypto}`);
-    const insightData = await insightRes.json();
-    setInsight(insightData.insight);
+      if (priceData.error) {
+        setError(priceData.error);
+        setPrice("N/A");
+        setInsight("AI insights unavailable.");
+        return;
+      }
+
+      setPrice(priceData.price);
+      setHistory((prev) => [...prev.slice(-6), priceData.price]);
+
+      const insightRes = await fetch(`http://127.0.0.1:5000/crypto-insight?crypto=${crypto}`);
+      const insightData = await insightRes.json();
+
+      if (insightData.error) {
+        setInsight("AI insights unavailable.");
+      } else {
+        setInsight(insightData.insight);
+      }
+    } catch (err) {
+      console.error("Error fetching data:", err);
+      setError("Failed to fetch data. Please check the backend connection.");
+      setPrice("N/A");
+      setInsight("AI insights unavailable.");
+    }
   };
 
   return (
@@ -36,6 +58,8 @@ export default function CryptoDashboard() {
         placeholder="Enter crypto name (e.g., bitcoin, ethereum)"
       />
       <Button onClick={fetchCryptoData}>Fetch Data</Button>
+
+      {error && <p className="text-red-500 text-center">{error}</p>}
 
       <Card>
         <CardContent className="p-4 text-center">

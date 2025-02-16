@@ -1,0 +1,56 @@
+.App {
+  min-height: 100vh;
+}
+
+main {
+  padding: 2rem 0;
+}
+
+section {
+  background-color: var(--background-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+
+p {
+  color: var(--accent);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.modern-disclaimer {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  margin: 2rem 0;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.modern-disclaimer:hover {
+  transform: translateY(-2px);
+}
+
+.modern-disclaimer h2 {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.modern-disclaimer p {
+  color: white;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}

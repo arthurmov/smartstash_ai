@@ -1,0 +1,80 @@
+.crypto-dashboard {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .input-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .crypto-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    background-color: var(--background-secondary);
+    color: var(--accent);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .crypto-input:focus {
+    outline: none;
+    border-color: var(--secondary);
+  }
+  
+  .fetch-button {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .fetch-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .crypto-card {
+    background-color: var(--background-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+  
+  .crypto-card h2 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+  }
+  
+  .crypto-card .price {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .crypto-card .insight {
+    color: var(--accent);
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+  
+  .chart-container {
+    background-color: var(--background-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-top: 1.5rem;
+  }
+  
