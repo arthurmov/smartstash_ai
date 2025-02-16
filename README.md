@@ -1,6 +1,6 @@
 # 🚀 AI-Powered Crypto Tracker  
 
-🏆 Hackathon Project
+## 🏆 Hackathon Project
 This project was developed as part of a hackathon, where we aimed to create an AI-driven financial tool that helps users track cryptocurrency prices, analyze investment opportunities, and receive AI-powered insights in real-time.
 
 
