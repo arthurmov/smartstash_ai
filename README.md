@@ -46,7 +46,7 @@ The **AI-Powered Crypto Tracker** is a smart tool that helps users **track crypt
 ### ℹ️ About Page  
 ![SmartStashAI About](assets/smartstash-screenshot.png) 
 
-## 🌙 Team Favorite Crypto
+### 🌙 Team Favorite Crypto
 ![SmartStashAI Dashboard](assets/Teamfavs.png)
 
 ---
