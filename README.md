@@ -16,7 +16,6 @@ The **AI-Powered Crypto Tracker** is a smart tool that helps users **track crypt
 ✔ **AI-Powered Investment Insights** – Uses **OpenAI GPT-4** to analyze trends and suggest buy/sell actions.  
 ✔ **Real-Time Web Scraping** – Collects financial news & trends to keep investors informed.  
 ✔ **User-Friendly Dashboard** – Displays crypto trends in an **interactive React UI** with charts & alerts.  
-✔ **Automated Alerts** – Notifies users when major price changes occur.  
 
 ---
 
